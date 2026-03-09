@@ -1,0 +1,122 @@
+{
+  "info": {
+    "_postman_id": "9fdff53d-e1a7-4c45-94a6-cb00c2b98cb8",
+    "name": "Challenge",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "42897304",
+    "_collection_link": "https://go.postman.co/collection/42897304-9fdff53d-e1a7-4c45-94a6-cb00c2b98cb8?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Criar um novo pedido",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"numeroPedido\": \"v10089015vdb-01\",\r\n  \"valorTotal\": 10000,\r\n  \"dataCriacao\": \"2023-07-19T12:24:11.529Z\",\r\n  \"items\": [\r\n    {\r\n      \"idItem\": \"2435\",\r\n      \"quantidadeItem\": 1,\r\n      \"valorItem\": 1000\r\n    }\r\n  ]\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{host}}/order",
+          "host": [
+            "{{host}}"
+          ],
+          "path": [
+            "order"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Dados do pedido por número do pedido",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{host}}/order/v10089015vdb-01",
+          "host": [
+            "{{host}}"
+          ],
+          "path": [
+            "order",
+            "v10089015vdb-01"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Listar todos os pedidos",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{host}}/order/list",
+          "host": [
+            "{{host}}"
+          ],
+          "path": [
+            "order",
+            "list"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Atualizar pedido por número do pedido",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"valorTotal\": 20000\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{host}}/order/v10089015vdb-01",
+          "host": [
+            "{{host}}"
+          ],
+          "path": [
+            "order",
+            "v10089015vdb-01"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Deletar o pedido por número do pedido",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"valorTotal\": 20000\r\n}"
+        },
+        "url": {
+          "raw": "{{host}}/order/v10089015vdb-01",
+          "host": [
+            "{{host}}"
+          ],
+          "path": [
+            "order",
+            "v10089015vdb-01"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
