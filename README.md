@@ -84,6 +84,7 @@ node server.js
 ```
 
 > O `init.sql` é executado automaticamente na primeira vez que o container sobe, criando as tabelas `order` e `items`.
+> Obs: atualize o seu .env DB_PORT=5433 e DB_LOCAL_PORT=5432
 
 ---
 
