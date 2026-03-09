@@ -2,62 +2,82 @@ import Order from "../models/Order.js";
 
 class OrderController {
 
+  // GET /order/list
   static async findAll(req, res) {
     try {
       const orders = await Order.findAll();
-      res.json(orders);
+      return res.status(200).json(orders);
     } catch (error) {
-      res.status(500).json({ error: error.message });
+      return res.status(500).json({ error: error.message });
     }
   }
 
+  // GET /order/:orderId
   static async findById(req, res) {
     try {
       const { orderId } = req.params;
       const order = await Order.findById(orderId);
 
       if (!order) {
-        return res.status(404).json({ message: "Order not found" });
+        return res.status(404).json({ error: "Pedido não encontrado." });
       }
 
-      res.json(order);
+      return res.status(200).json(order);
     } catch (error) {
-      res.status(500).json({ error: error.message });
+      return res.status(500).json({ error: error.message });
     }
   }
 
+  // POST /order
   static async create(req, res) {
     try {
-      const { value } = req.body;
-      const order = await Order.create(value);
-      res.status(201).json(order);
+      const { numeroPedido, valorTotal, dataCriacao, items } = req.body;
+
+      if (!numeroPedido || !valorTotal || !dataCriacao || !Array.isArray(items) || items.length === 0) {
+        return res.status(400).json({ error: "Payload inválido." });
+      }
+
+      const order = await Order.create(numeroPedido, valorTotal, dataCriacao, items);
+      return res.status(201).json(order);
     } catch (error) {
-      res.status(500).json({ error: error.message });
+      return res.status(500).json({ error: error.message });
     }
   }
 
+  // PUT /order/:orderId
   static async update(req, res) {
     try {
       const { orderId } = req.params;
-      const { value } = req.body;
+      const { valorTotal } = req.body;
 
-      const order = await Order.update(orderId, value);
-      res.json(order);
+      const order = await Order.findById(orderId);
+      if (!order) {
+        return res.status(404).json({ error: "Pedido não encontrado." });
+      }
+
+      const updated = await Order.update(orderId, valorTotal);
+      return res.status(200).json(updated);
     } catch (error) {
-      res.status(500).json({ error: error.message });
+      return res.status(500).json({ error: error.message });
     }
   }
 
+  // DELETE /order/:orderId
   static async delete(req, res) {
     try {
       const { orderId } = req.params;
-      const order = await Order.delete(orderId);
-      res.json(order);
+
+      const order = await Order.findById(orderId);
+      if (!order) {
+        return res.status(404).json({ error: "Pedido não encontrado." });
+      }
+
+      await Order.delete(orderId);
+      return res.status(200).json({ message: "Pedido deletado com sucesso!" });
     } catch (error) {
-      res.status(500).json({ error: error.message });
+      return res.status(500).json({ error: error.message });
     }
   }
-
 }
 
-export default OrderController;
+export default OrderController; // ✅
