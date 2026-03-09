@@ -1,6 +1,9 @@
 import express from "express";
 import OrderController from "../controllers/orderController.js";
 
+/*
+Responsável por cada rota e endereço
+*/
 const router = express.Router();
 
 router.get("/order/list", OrderController.findAll);

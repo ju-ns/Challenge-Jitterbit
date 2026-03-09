@@ -1,5 +1,9 @@
 import Order from "../models/Order.js";
 
+/*
+Responsável pela lógica por trás de cada chamada a API
+Utiliza o model para acessar aos dados do banco
+*/
 class OrderController {
 
   // GET /order/list
